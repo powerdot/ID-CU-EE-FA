@@ -45,11 +45,11 @@ let AI = {
 	  const net = new brain.recurrent.LSTMTimeStep() // Создаем нейронную сеть
 	  net.train([this.pattern], { iterations: 100, log: false }) // Обучаем ее на патерне предыдущих игр
 	  const humanWillChose = net.run(this.pattern) // Получаем (из обученной сети) предположение что я мог выкинуть (какой жест? 1 2 или 3)
-	  this.updatePattern() // Вставляем ответ игрока в общий паттерн его действий, это не влияет на результат работы нейронной сети сейчас
 	  const roundedHumanWillChose = Math.round(humanWillChose) // Нейросеть выдает, допустим, 1.00022393 - это означает, что она думает, что я бы выбрал 1. Округляем.
 	  this.chosenByAI = 1 <= roundedHumanWillChose && roundedHumanWillChose <= 3 ? (roundedHumanWillChose % 3) + 1 : 1; // Правила игры. На предполагаемый выбор игрока наклавываем что должна ответить нейро сеть. То есть 2.
 	  // - Вот с этого момента нейросеть выдает 2 в качестве своего ответа
 	  console.log('Соответственно выбор AI будет:', this.chosenByAI);
+	  this.updatePattern() // Вставляем ответ игрока в общий паттерн его действий уже для будущих ответов
 	},
 	// Функция определения кто выиграл - очень простая
 	whoIsTheWinner: function() {

@@ -55,11 +55,10 @@ let FingerCatch = {
 			},
 			like: function(){
 				const Gesture = new fp.GestureDescription('like'); // лайк - это:
-				// Gesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 0.5); // большой палец полностью раскрыт
+				Gesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 0.5); // большой палец полностью раскрыт
 				Gesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalUp, 1.0);
 				Gesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalUpLeft, 0.5);
 				Gesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalUpRight, 0.5);
-
 				Gesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0); // указательный палец полностью согнут
 				Gesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0); // средний палец полностью согнут
 				Gesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0); // безымянный палец полностью согнут
