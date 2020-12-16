@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: white;
+    color: black;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Видео и Канвас */
+#pose-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleX(-1);
+    width: 640px;
+    height: 480px;
+}
+#pose-canvas{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 640px;
+    height: 480px;
+}
+
+
+/* Интерфейс игры */
+.message_screen{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.message_screen .game_result .score{
+    font-size: 20pt;
+    margin: 0 20px;
+}
+
+
+/* DEBUG */
+.debug{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #03A9F4;
+    height: 20px;
+    color: black;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.debug .title{
+    color: white;
+    font-weight: bold;
+    font-size: 9pt;
+    opacity: 0.5;
+    margin-left: 7px;
+}
+.debug .label{
+    margin-left: 20px;
+    opacity: 0.5;
+    position: relative;
+    top: 2px;
+}
+.debug .value{
+    min-width: 75px;
+    height: 15px;
+    display: inline-block;
+    background: rgba(0,0,0,.1);
+    border-radius: 4px;
+    position: relative;
+    top: 5px;
+    font-size: 10pt;
+    padding: 1px 4px;
+    overflow: hidden;
+    margin-top: -2px;
+}
+.debug .value.small{
+    min-width: 30px;
+}
+.debug .show_video{
+    float: right;
+    border: none;
+    cursor: pointer;
+    background: #009688;
+    color: white;
+    padding: 3px 10px;
+    outline: none;
+}
+.debug .show_video:hover{
+    background: #00695c;
+}
+.debug .start_stop{
+    float: right;
+    border: none;
+    cursor: pointer;
+    background: #3f51b5;
+    color: white;
+    padding: 3px 10px;
+    outline: none;
+}
+.debug .start_stop:hover{
+    background: #283593;
+}
+.debug .start_stop.paused{
+    background: #f44336;
+}
+.debug .start_stop.paused:hover{
+    background: #a73027;
+}
+
+/* Дополнительные свойства */
+.hidden{
+    display: none !important;
+}
+.invisible{
+    visibility: hidden;
+}

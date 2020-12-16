@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+		<title>Камень Ножницы Бумага!</title>
+		<link rel="shortcut icon" href="favicon.png" type="image/png">
+		<link rel="stylesheet" href="/assets/style.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&family=Ubuntu:wght@300;400;500&display=swap" rel="stylesheet">
+
+		<!-- Господин нейросеть TenserFlow v2.7.0 -->
+		<script src="/assets/tf270.min.js"></script>
+		<!-- Handpose - заранее обученная TenserFlow модель на руках -->
+		<script src="/assets/handpose.js"></script>
+		<!-- FingerPose.js для работы с жестами -->
+		<script src="/assets/fingerpose.js" type="text/javascript"></script>
+		<!-- Brain.js для обучения игры в камень-ножницы-бумага -->
+		<script src="/assets/brain-browser.min.js"></script>
+
+		<!-- Наш код: нейронка, которая отвечает за игру в камень-ножницы-бумага (работает на Brain.js) -->
+		<script src='AI.js'></script>
+		<!-- Наш код: нейронка, которая отвечает за определение жестов и движения (работает на Fingerpose, Handpose и TenserFlow) -->
+		<script src='FingerCatch.js'></script>
+		<!-- Наш код: управление интерфейсом (ванильный самопис) -->
+		<script src='UI.js'></script>
+
+		<!-- Наш код: толкает к работе нейронки и запускает всё это чудо -->
+		<script src='index.js'></script>
+	</head>
+	<body>
+		<!-- Видео и Канвас -->
+		<video id="pose-video" class="invisible" playsinline></video>
+		<canvas id="pose-canvas"></canvas>
+
+		<!-- Интерфейс игры -->
+		<div class='message_screen'>
+			<!-- 1. Лоудер -->
+			<div class="loading hidden">
+				<h2>Загрузка...</h2>
+				<div class="status">...</div>
+			</div>
+
+			<!-- 2. Первый старт -->
+			<div class="letsstart hidden">
+				<h2>Давай начнём!</h2>
+				<div>
+					<b>Можешь посмотреть на свою руку.</b>
+					<br>
+					Просто покажи её на камеру, ты здесь увидишь её в виде точек.
+					<br>
+					<br>
+					Сразу как покажешь мне жест "лайк",
+					<br>
+					<b>я начну обратный отсчёт 3, 2 ,1...</b>
+					<br>
+					<br>
+					Будь готов за время отсчёта показать жест:
+					<br>
+					Камень, ножницы или бумагу!
+				</div>
+			</div>
+
+			<!-- 3. Ожидание жеста -->
+			<div class='game_counter hidden'>
+				<h2>Приготовь и покажи жест!</h2>
+				<div class="timer" style="font-size: 40pt; font-weight: bold;">3...</div>
+			</div>
+
+			<!-- 4. Результат игры -->
+			<div class='game_result hidden'>
+				<h2 class='title'></h2>
+				Ты показал 
+				<b><span class='human_answer'></span></b>
+				<br>
+				ИИ показал 
+				<b><span class='ai_answer'></span></b>
+				<br>
+				<br>
+				Счёт
+				<br>
+				<span class='score'>
+					<span class="emoji">👨‍🦲</span>
+					<span class='human_score'></span>
+				</span>
+				<span class='score'>
+					<span class="emoji">🤖</span>
+					<span class='ai_score'></span>
+				</span>
+				<br>
+				<br>
+				Покажи лайк, чтобы продолжить!
+			</div>
+		</div>
+
+		<!-- Панель дебага -->
+		<div class='debug'>
+			<span class='title'>DEBUG</span> 
+			<span class="label">ЖЕСТ:</span>
+			<span class='value gesture'></span>
+			<span class="label">FPS:</span>
+			<span class='value small fps'></span>
+			<span class="label">Step:</span>
+			<span class='value step'></span>
+			<span class="label">Очки человека:</span>
+			<span class='value small human_score'></span>
+			<span class="label">Очки машинки:</span>
+			<span class='value small ai_score'></span>
+			<span class="label">Игр сыграно:</span>
+			<span class='value small games_amount'></span>
+			<button class='show_video'>Вкл. видео</button>
+			<button class='start_stop'>Пауза</button>
+		</div>
+	</body>
+</html>
