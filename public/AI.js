@@ -17,12 +17,14 @@ let AI = {
 	gameCount: 0,
 	patternLength: 10,
 	chosenByAI: 0,
+	// Функция входа - активирует цепочку работы
 	humanInput: function(rockOrPaperOrScissors) {
 	  this.chosenByHuman = rockOrPaperOrScissors
 	  this.gameCount++
 	  this.whatShouldAIAnswer()
 	  this.whoIsTheWinner()
 	},
+	// Функция заполнения предыдущих несуществующих игр (паттерна) случайными значениями
 	prepareData: function(){
 		if (this.pattern.length < 1) {
 			for (let index = 1; index <= this.patternLength; index++) {
@@ -30,23 +32,26 @@ let AI = {
 			}
 		}
 	},
+	// Обновление паттерна последним значением
 	updatePattern: function(){
 		if (this.gameCount !== 0) {
 			this.pattern.shift()
 			this.pattern.push(this.chosenByHuman)
 		}
 	},
+	// Функция, которая выдает ответ нейросети во время её хода
 	whatShouldAIAnswer: function() {
-	  this.prepareData()
-	  const net = new brain.recurrent.LSTMTimeStep()
-	  net.train([this.pattern], { iterations: 100, log: false })
-	  const humanWillChose = net.run(this.pattern)
-	  this.updatePattern()
-	  const roundedHumanWillChose = Math.round(humanWillChose)
-	  this.chosenByAI = 1 <= roundedHumanWillChose && roundedHumanWillChose <= 3 ? (roundedHumanWillChose % 3) + 1 : 1;
-	  console.log('Скорее всего человек выберет следующим: ' + roundedHumanWillChose)
-	  console.log('Соответственно выбор AI будет:', this.chosenByAI)
+	  this.prepareData();
+	  const net = new brain.recurrent.LSTMTimeStep() // Создаем нейронную сеть
+	  net.train([this.pattern], { iterations: 100, log: false }) // Обучаем ее на патерне предыдущих игр
+	  const humanWillChose = net.run(this.pattern) // Получаем (из обученной сети) предположение что я мог выкинуть (какой жест? 1 2 или 3)
+	  this.updatePattern() // Вставляем ответ игрока в общий паттерн его действий, это не влияет на результат работы нейронной сети сейчас
+	  const roundedHumanWillChose = Math.round(humanWillChose) // Нейросеть выдает, допустим, 1.00022393 - это означает, что она думает, что я бы выбрал 1. Округляем.
+	  this.chosenByAI = 1 <= roundedHumanWillChose && roundedHumanWillChose <= 3 ? (roundedHumanWillChose % 3) + 1 : 1; // Правила игры. На предполагаемый выбор игрока наклавываем что должна ответить нейро сеть. То есть 2.
+	  // - Вот с этого момента нейросеть выдает 2 в качестве своего ответа
+	  console.log('Соответственно выбор AI будет:', this.chosenByAI);
 	},
+	// Функция определения кто выиграл - очень простая
 	whoIsTheWinner: function() {
 	  if (this.chosenByHuman === this.chosenByAI) {
 		this.winner = 'draw'
