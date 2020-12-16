@@ -26,10 +26,8 @@ let AI = {
 	},
 	// Функция заполнения предыдущих несуществующих игр (паттерна) случайными значениями
 	prepareData: function(){
-		if (this.pattern.length < 1) {
-			for (let index = 1; index <= this.patternLength; index++) {
-				this.pattern.push(Math.floor(Math.random() * 3) + 1)
-			}
+		for (let index = 1; index <= this.patternLength; index++) {
+			this.pattern.push(Math.floor(Math.random() * 3) + 1)
 		}
 	},
 	// Обновление паттерна последним значением
@@ -41,7 +39,7 @@ let AI = {
 	},
 	// Функция, которая выдает ответ нейросети во время её хода
 	whatShouldAIAnswer: function() {
-	  this.prepareData();
+	  if(this.pattern.length < 1) this.prepareData();
 	  const net = new brain.recurrent.LSTMTimeStep() // Создаем нейронную сеть
 	  net.train([this.pattern], { iterations: 100, log: false }) // Обучаем ее на патерне предыдущих игр
 	  const humanWillChose = net.run(this.pattern) // Получаем (из обученной сети) предположение что я мог выкинуть (какой жест? 1 2 или 3)
