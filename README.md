@@ -2,6 +2,8 @@
 
 ![Пример работы](https://media.giphy.com/media/86O4qkmYBk2R1n2TJ4/giphy.gif)
 
+[Посмотри на YouTube!](https://www.youtube.com/watch?v=z4mU6en1Hg0)
+
 Дамы и господа!  
 
 Против людей на бой выходят 2 нейросети:  
