@@ -2,7 +2,8 @@
 
 ![Пример работы](https://media.giphy.com/media/86O4qkmYBk2R1n2TJ4/giphy.gif)
 
-Demo: [here!](http://powerdot.github.io/ID-CU-EE-FA/)
+Demo: [here!](http://powerdot.github.io/ID-CU-EE-FA/)  
+
 [Посмотри на YouTube!](https://www.youtube.com/watch?v=z4mU6en1Hg0)
 
 Дамы и господа!  
